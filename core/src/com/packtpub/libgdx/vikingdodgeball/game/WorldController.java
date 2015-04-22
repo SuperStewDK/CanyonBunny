@@ -52,19 +52,19 @@ public class WorldController extends InputAdapter {
         int height = 32;
 //        Pixmap pixmap = createProceduralPixmap(width, height);
         // Create a new texture from pixmap data
-        Texture texture = new Texture("core/assets/viking_helmet_new.png");
+        Texture texture = new Texture("core/assets/viking_still.png");
         // Create new sprites using the just created texture
         for (int i = 0; i < testSprites.length; i++) {
             Sprite spr = new Sprite(texture);
             // Define sprite size to be 1m x 1m in game world
-            spr.setSize(0.6f, 0.4f);
+            spr.setSize(0.4f, 0.6f);
             // Set origin to sprite's center
-            spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.43f);
+            spr.setOrigin(spr.getWidth() / 2.5f, spr.getHeight() / 2.0f);
             // Calculate random position for sprite
             randomX = MathUtils.random(-2.0f, 2.0f);
             randomY = MathUtils.random(-2.0f, 2.0f);
             spr.setPosition(randomX, randomY);
-            spr.setRotation(-90);
+            spr.setRotation(0);
             // Put new sprite into array
             testSprites[i] = spr;
         }
@@ -107,7 +107,7 @@ public class WorldController extends InputAdapter {
 
         // Selected Sprite Controls
         float sprMoveSpeed = 2 * deltaTime;
-        double angle = Math.toRadians(rotation+90);
+        double angle = Math.toRadians(rotation);
 
 
         if (Gdx.input.isKeyPressed(Keys.A)) {
@@ -163,6 +163,7 @@ public class WorldController extends InputAdapter {
          // Select next sprite
             else if (keycode == Keys.SPACE) {
                 selectedSprite = (selectedSprite + 1) % testSprites.length;
+                rotation = testSprites[selectedSprite].getRotation();
                 Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
             }
             return false;
